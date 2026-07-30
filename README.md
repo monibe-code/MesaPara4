@@ -12,7 +12,7 @@
   <a href="https://mesapara4.es">
     <img src="https://img.shields.io/badge/Website-mesapara4.es-ff4b5c?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Sitio Web" />
   </a>
-  <img src="https://img.shields.io/badge/Estado-En%20Desarrollo-orange?style=for-the-badge" alt="Estado del Proyecto" />
+  <img src="https://img.shields.io/badge/Estado-Publicado-brightgreen?style=for-the-badge" alt="Estado del Proyecto" />
 </p>
 
 ---
