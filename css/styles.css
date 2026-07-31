@@ -514,6 +514,9 @@ section { padding: 88px 0; }
   font-size: .82rem;
   color: var(--color-text-muted);
 }
+.footer-bottom a {
+  text-decoration: underline;
+}
 
 /* ---------- Utilidades ---------- */
 .badge {
