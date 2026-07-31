@@ -1,14 +1,59 @@
-// ============ Menú móvil ============
-const navToggle = document.querySelector('.nav-toggle');
-const mainNav = document.querySelector('.main-nav');
-if (navToggle && mainNav) {
-  navToggle.addEventListener('click', () => {
-    mainNav.classList.toggle('open');
-  });
-  mainNav.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => mainNav.classList.remove('open'));
+// ============ Cargar cabecera y footer compartidos ============
+// header.html y footer.html se inyectan en tiempo de carga en cada página.
+// Requiere servir el sitio por http(s) (no abrir el .html directamente
+// con file://), ya que usa fetch().
+async function loadIncludes() {
+  const headerSlot = document.getElementById('site-header');
+  const footerSlot = document.getElementById('site-footer');
+
+  try {
+    const [headerHTML, footerHTML] = await Promise.all([
+      fetch('/header.html').then(r => r.text()),
+      fetch('/footer.html').then(r => r.text())
+    ]);
+
+    if (headerSlot) headerSlot.innerHTML = headerHTML;
+    if (footerSlot) footerSlot.innerHTML = footerHTML;
+  } catch (err) {
+    console.error('No se pudo cargar header/footer:', err);
+  }
+
+  initHeader();
+  initFooterYear();
+}
+
+// ============ Menú móvil + página activa (tras inyectar el header) ============
+function initHeader() {
+  const navToggle = document.querySelector('.nav-toggle');
+  const mainNav = document.querySelector('.main-nav');
+
+  if (navToggle && mainNav) {
+    navToggle.addEventListener('click', () => {
+      mainNav.classList.toggle('open');
+    });
+    mainNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => mainNav.classList.remove('open'));
+    });
+  }
+
+  // Resalta el enlace de la página actual comparando la URL con data-page
+  const slug = window.location.pathname === '/'
+    ? 'inicio'
+    : window.location.pathname.replace(/^\/+|\/+$/g, '');
+
+  document.querySelectorAll('.main-nav a[data-page]').forEach(link => {
+    if (link.dataset.page === slug) link.classList.add('active');
   });
 }
+
+// ============ Año actual en el footer (tras inyectar el footer) ============
+function initFooterYear() {
+  document.querySelectorAll('.current-year').forEach(el => {
+    el.textContent = new Date().getFullYear();
+  });
+}
+
+loadIncludes();
 
 // ============ Animación al hacer scroll ============
 const revealEls = document.querySelectorAll('.reveal');
@@ -30,7 +75,6 @@ if ('IntersectionObserver' in window && revealEls.length) {
 // Protección anti-bot sencilla para un sitio sin backend propio:
 // 1) Campo "honeypot" invisible: si un bot lo rellena, se descarta el envío.
 // 2) Tiempo mínimo en el formulario: los bots suelen enviar en menos de 2s.
-// ============ Formulario de contacto ============
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
   const loadedAt = Date.now();
@@ -57,7 +101,7 @@ if (contactForm) {
 
     // Recogemos los datos introducidos en el formulario
     const formData = new FormData(contactForm);
-    
+
     // Tu clave de Web3Forms
     formData.append('access_key', '84253598-24f5-49a1-9e3d-5b9e082bf7a6');
 
@@ -83,9 +127,3 @@ if (contactForm) {
     }
   });
 }
-
-
-// ============ Año actual en el footer ============
-document.querySelectorAll('.current-year').forEach(el => {
-  el.textContent = new Date().getFullYear();
-});
