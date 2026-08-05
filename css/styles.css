@@ -534,3 +534,8 @@ section { padding: 88px 0; }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
 }
+/* Subraya los enlaces dentro de párrafos, etiquetas y tarjetas */
+.card p a,
+.checkbox-field label a {
+  text-decoration: underline;
+}
