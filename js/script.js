@@ -20,6 +20,7 @@ async function loadIncludes() {
 
   initHeader();
   initFooterYear();
+  initBackToTop();
 }
 
 // ============ Menú móvil + página activa (tras inyectar el header) ============
@@ -54,6 +55,25 @@ function initFooterYear() {
 }
 
 loadIncludes();
+
+// ============ Botón "volver arriba" (tras inyectar el footer) ============
+function initBackToTop() {
+  const btn = document.getElementById('back-to-top');
+  if (!btn) return;
+
+  const SHOW_AFTER = 400; // px de scroll antes de mostrar el botón
+
+  const toggleVisibility = () => {
+    btn.classList.toggle('show', window.scrollY > SHOW_AFTER);
+  };
+
+  window.addEventListener('scroll', toggleVisibility, { passive: true });
+  toggleVisibility(); // por si la página se recarga ya con scroll
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
 
 // ============ Animación al hacer scroll ============
 const revealEls = document.querySelectorAll('.reveal');
