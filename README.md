@@ -44,6 +44,14 @@ Esta web actúa como la landing page oficial de **MesaPara4**. Está diseñada p
 
 ---
 
+---
+
+## ☕ Apoya el proyecto
+
+Si te gusta **MesaPara4** y quieres apoyar su desarrollo continuado, puedes invitarme a un café a través de Ko-fi:
+
+[![Ko-Fi](https://img.shields.io/badge/Invítame_un_café-Ko--fi-FF5E5B?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/mesapara4)
+
 ## ⚖️ Licencia y Propiedad Intelectual
 
 © 2026 **MesaPara4**. Todos los derechos reservados.
