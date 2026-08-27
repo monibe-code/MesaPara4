@@ -126,6 +126,16 @@ section { padding: 88px 0; }
   justify-content: space-between;
   height: 76px;
 }
+
+.site-header .brand {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+.site-header .brand:hover {
+  color: var(--color-primary);
+}
 .brand {
   display: flex;
   align-items: center;
