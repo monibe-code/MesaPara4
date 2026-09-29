@@ -118,6 +118,21 @@ if (contactForm) {
       contactForm.reset();
       return;
     }
+    // Validar tamaño máximo del archivo de captura (ej. 5 MB) ---
+    const fileInput = contactForm.querySelector('input[name="captura"]');
+    if (fileInput && fileInput.files.length > 0) {
+      const file = fileInput.files[0];
+      const MAX_SIZE_MB = 5;
+      const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
+
+      if (file.size > MAX_SIZE_BYTES) {
+        if (errorBox) {
+          errorBox.textContent = `La imagen es demasiado grande. El límite es de ${MAX_SIZE_MB} MB.`;
+          errorBox.style.display = 'block';
+        }
+        return; // Detenemos el envío
+      }
+    }
 
     // Recogemos los datos introducidos en el formulario
     const formData = new FormData(contactForm);
